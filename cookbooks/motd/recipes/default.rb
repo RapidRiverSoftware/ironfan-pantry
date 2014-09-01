@@ -32,8 +32,14 @@ node.set[:motd]                 = Mash.new unless node[:motd]
 
 node.set[:motd][:roles]         = node[:roles]                  || []
 node.set[:motd][:ipaddress]     = node[:ipaddress]              || ''
-node.set[:motd][:private_ips]   = node[:cloud][:private_ips]    || []
-node.set[:motd][:public_ips]    = node[:cloud][:public_ips]     || []
+if node[:cloud]
+  node.set[:motd][:private_ips]   = node[:cloud][:private_ips]    || []
+  node.set[:motd][:public_ips]    = node[:cloud][:public_ips]     || []
+else
+  node.set[:motd][:private_ips]   = []
+  node.set[:motd][:public_ips]    = []
+  Chef::Log.warn("Cannot determine public and private IPs, because the node[:cloud] attributes aren't set. On a cloud machine, sometimes this doesn't happen until the second run.")
+end
 node.set[:motd][:description]   = node[:lsb][:description]      || ''
 
 include_recipe 'motd::ec2' if node[:ec2]
