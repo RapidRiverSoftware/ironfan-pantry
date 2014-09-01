@@ -7,7 +7,6 @@ end
 # jar...
 file File.join(node[:kafka][:home_dir], 'contrib/hadoop-consumer/lib_managed/scala_2.8.0/compile/hadoop-core-0.20.2.jar') do
   action :delete
-
 end
 
 if not node[:kafka][:hadoop_jar].nil? and node[:kafka][:hadoop_jar]

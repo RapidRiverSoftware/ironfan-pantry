@@ -1,7 +1,7 @@
 # Install
 default[:kafka][:package_name]                      = 'kafka'
-default[:kafka][:version]                           = '0.7.1-incubating'
-default[:kafka][:release_url]                       = "http://artifacts.chimpy.us.s3.amazonaws.com/tarballs/kafka-:version:-src.tgz"
+default[:kafka][:version]                           = '0.8.1.1'
+default[:kafka][:release_url]                       = "http://mirror.sdunix.com/apache/kafka/:version:/kafka-:version:-src.tgz"
 
 default[:kafka][:user]                              = 'kafka'
 default[:users ]['kafka'][:uid]                     = 452

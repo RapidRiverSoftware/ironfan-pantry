@@ -30,6 +30,7 @@ actions(
   :build_with_make,
   :build_with_ant,
   :build_with_sbt,
+  :build_with_gradlew,
   :install_with_make,
   :install_binaries,
   :install_python

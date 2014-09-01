@@ -15,7 +15,7 @@ install_from_release(:kafka) do
   release_url   node[:kafka][:release_url]
   version       node[:kafka][:version]
   checksum      node[:kafka][:checksum]
-  action        [:build_with_sbt, :install]
+  action        [:build_with_gradlew, :install]
 end
 
 include_recipe 'kafka::install_common'
