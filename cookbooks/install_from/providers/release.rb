@@ -140,7 +140,7 @@ action :build_with_gradlew do
   bash "build #{new_resource.name} with gradlew" do
     user        new_resource.user
     cwd         new_resource.install_dir
-    code        "./gradlew clean; ./gradlew assemble -x signArchives"
+    code        "./gradlew clean; ./gradlew jar -x signArchives"
     environment new_resource.environment
   end
 end
