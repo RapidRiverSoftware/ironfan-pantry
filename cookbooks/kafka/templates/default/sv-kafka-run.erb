@@ -7,31 +7,49 @@
 
 base_dir=<%= node[:kafka][:home_dir] %>
 
-for file in $base_dir/project/boot/scala-2.8.0/lib/*.jar;
+if [ -z "$SCALA_VERSION" ]; then
+	SCALA_VERSION=2.8.0
+fi
+
+for file in $base_dir/core/build/dependant-libs-${SCALA_VERSION}/*.jar;
 do
   CLASSPATH=$CLASSPATH:$file
 done
 
-for file in $base_dir/core/target/scala_2.8.0/*.jar;
+for file in $base_dir/perf/build/libs//kafka-perf_${SCALA_VERSION}*.jar;
 do
   CLASSPATH=$CLASSPATH:$file
 done
 
-for file in $base_dir/core/lib/*.jar;
+for file in $base_dir/clients/build/libs//kafka-clients*.jar;
 do
   CLASSPATH=$CLASSPATH:$file
 done
 
-for file in $base_dir/perf/target/scala_2.8.0/kafka*.jar;
+for file in $base_dir/examples/build/libs//kafka-examples*.jar;
 do
   CLASSPATH=$CLASSPATH:$file
 done
 
-for file in $base_dir/core/lib_managed/scala_2.8.0/compile/*.jar;
+for file in $base_dir/contrib/hadoop-consumer/build/libs//kafka-hadoop-consumer*.jar;
 do
-  if [ ${file##*/} != "sbt-launch.jar" ]; then
-    CLASSPATH=$CLASSPATH:$file
-  fi
+  CLASSPATH=$CLASSPATH:$file
+done
+
+for file in $base_dir/contrib/hadoop-producer/build/libs//kafka-hadoop-producer*.jar;
+do
+  CLASSPATH=$CLASSPATH:$file
+done
+
+# classpath addition for release
+for file in $base_dir/libs/*.jar;
+do
+  CLASSPATH=$CLASSPATH:$file
+done
+
+for file in $base_dir/core/build/libs/kafka_${SCALA_VERSION}*.jar;
+do
+  CLASSPATH=$CLASSPATH:$file
 done
 
 JMX_PORT=<%= node[:kafka][:jmx_port] %>
