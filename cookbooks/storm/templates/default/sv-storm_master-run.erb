@@ -6,4 +6,5 @@ ulimit -n <%= @node[:storm][:master][:file_limit] %>
 
 <%- end %>
 cd <%= @node[:storm][:home_dir] %>
+export HOME=<%= @node[:storm][:home_dir] %>
 exec chpst -u <%= @node[:storm][:user] %> storm nimbus
